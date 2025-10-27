@@ -1,0 +1,71 @@
+---
+title: "plots examples"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+```{r}
+library(tidyverse)
+library(ggridges)
+library(p8105.datasets)
+```
+
+Import the weather data
+```{r}
+data("weather_df")
+```
+
+Making our first plot :)
+```{r}
+ggplot(weather_df, mapping = aes(x = tmin, y = tmax))
+```
+
+A blanking one, That’s because I’ve defined the data and the aesthetic mappings, but haven’t added any geoms: ggplot knows what data I want to plot and how I want to map variables, but not what I want to show. Below I add a geom to define my first scatterplot.
+
+Add geom_point()
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point()
+```
+
+if you want to have some pre-processing
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) + 
+  geom_point()
+```
+
+We assign it to a variable
+```{r}
+ggp_weather = 
+  weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) 
+
+ggp_weather + geom_point()
+```
+
+We get a warning about missing value. We want to check the rows that are missing.
+nariar?
+```{r}
+weather_df |>
+  filter(is.na(tmax))
+```
+
+
+## Advanced and Fancier scatterplots
+
+incorporate name with different color
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax, colour = name)) +
+  geom_point()
+# geom_point(alpha = 0.3) This can show some density, it makes the color lighter
+```
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name))
+```
