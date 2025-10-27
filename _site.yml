@@ -8,7 +8,7 @@ navbar:
     - text: "Dashboard"
       href: dashboard.html
     - text: "Plots Examples"
-      href: plots.html
+      href: plots-examples.html
     - icon: fa-envelope fa-lg
       href: mailto:<yh3964@cumc.columbia.edu>
     - icon: fa-github fa-lg
