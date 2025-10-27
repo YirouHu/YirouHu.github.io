@@ -21,3 +21,5 @@ B.S. Financial Mathematics | September 2021 - June 2025
 **Incorporating Biophysical Modeling and Deep Learning for Wearable Blood Pressure Monitoring** | Research Assistant | June 2024 - August 2024
 
 **Diffusion Models Methods and Application** | Final Year Project | June 2024 - June 2025
+
+You can click [homepage](index.html) to go back to homepage.
