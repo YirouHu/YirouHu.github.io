@@ -15,3 +15,7 @@ My name is Yirou Hu. Great to see you!
 
 I have completed my B.S degree in Financial Mathematics and persuing M.S degree in Biostatistics currently. I am skilled in Python, R, Matlab and Stata.
 
+Here are some plots examples in [Plots Examples](plots examples.html).
+
+I made some beautiful plots in [Dashboard](dashboard.html).
+

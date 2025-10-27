@@ -4,7 +4,6 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
-    source: embed
 ---
 ```{r setup, include=FALSE}
 library(p8105.datasets)
@@ -17,12 +16,12 @@ data("ny_noaa")
 ```
 
 ```{r}
-ny_noaa_df= 
+ny_noaa_df = 
   ny_noaa |>
   janitor::clean_names() |>
   drop_na() |>
   separate(col = date, into = c ("year", "month", "day") , sep = "-", convert = TRUE) |>
-  mutate(snowfall = snow*25.4,
+  mutate(snowfall = snow * 25.4,
          month = month.abb[month],
          tmax = as.numeric(tmax) / 10,
          tmin = as.numeric(tmin) / 10) |>
@@ -36,13 +35,14 @@ Column {data-width=650}
 ### Chart 1: New York Station's Snowfalls in 2002
 
 ```{r}
-ny_noaa_df %>% 
-  mutate(month = fct_reorder(month, snowfall)) %>% 
-  plot_ly(y = ~snowfall, color = ~month, type = "box", colors = "viridis") %>%
-  layout(xaxis = list(title = 'Month'),
+ny_noaa_df |>
+  mutate(month = fct_reorder(month, snowfall)) |> 
+  plot_ly(y = ~snowfall, color = ~month, type = "box", colors = "viridis") |>
+  layout(xaxis = list(title = 'Months'),
          yaxis = list(title = 'Snowfall (mm)'))
 ```
 
+Column {data-width=650}
 -----------------------------------------------------------------------
 
 ### Chart 2: New York Station's Monthly Mininum and Maximum Temperature in 2002
@@ -64,8 +64,5 @@ ny_noaa_df |>
   mutate(id = fct_reorder(id, n)) |> 
   plot_ly(x = ~id, y = ~n, color = ~id, type = "bar", colors = "viridis") |>
   layout(xaxis = list(title = 'Station ID'),
-         yaxis = list(title = 'Number of Snowy Days'))
-
-
-```
+         yaxis = list(title = 'Number of Snowy Days in New York'))
 ```
