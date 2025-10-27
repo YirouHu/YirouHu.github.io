@@ -1,0 +1,23 @@
+---
+title: "About Me"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+## Education
+
+**Columbia University** | New York, NY
+
+M.S. Biostatistics | September 2025 - May 2027
+
+**Xi'an Jiaotong-Liverpool University** | Suzhou, China
+
+B.S. Financial Mathematics | September 2021 - June 2025
+
+## Experience
+
+**Incorporating Biophysical Modeling and Deep Learning for Wearable Blood Pressure Monitoring** | Research Assistant | June 2024 - August 2024
+
+**Diffusion Models Methods and Application** | Final Year Project | June 2024 - June 2025
