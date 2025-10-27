@@ -1,0 +1,71 @@
+---
+title: "dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+```{r setup, include=FALSE}
+library(p8105.datasets)
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+
+
+data("ny_noaa")
+```
+
+```{r}
+ny_noaa_df= 
+  ny_noaa |>
+  janitor::clean_names() |>
+  drop_na() |>
+  separate(col = date, into = c ("year", "month", "day") , sep = "-", convert = TRUE) |>
+  mutate(snowfall = snow*25.4,
+         month = month.abb[month],
+         tmax = as.numeric(tmax) / 10,
+         tmin = as.numeric(tmin) / 10) |>
+  filter(snow > 0, snow < 300, year == 2002) |>
+  select(id, year, month, day, snowfall, tmax, tmin)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart 1: New York Station's Snowfalls in 2002
+
+```{r}
+ny_noaa_df %>% 
+  mutate(month = fct_reorder(month, snowfall)) %>% 
+  plot_ly(y = ~snowfall, color = ~month, type = "box", colors = "viridis") %>%
+  layout(xaxis = list(title = 'Month'),
+         yaxis = list(title = 'Snowfall (mm)'))
+```
+
+-----------------------------------------------------------------------
+
+### Chart 2: New York Station's Monthly Mininum and Maximum Temperature in 2002
+
+```{r}
+
+ny_noaa_df |>
+  plot_ly(x = ~tmin, y = ~tmax, color = ~month, opacity=0.5, colors = "viridis") |>
+  layout(xaxis = list(title = 'Mininum Temperature'),
+         yaxis = list(title = 'Maximum Temperature'))
+
+```
+
+### Chart 3: New York Station's Snowy Days Frequency in 2002
+
+```{r}
+ny_noaa_df |> 
+  count(id) |>
+  mutate(id = fct_reorder(id, n)) |> 
+  plot_ly(x = ~id, y = ~n, color = ~id, type = "bar", colors = "viridis") |>
+  layout(xaxis = list(title = 'Station ID'),
+         yaxis = list(title = 'Number of Snowy Days'))
+
+
+```
+```
